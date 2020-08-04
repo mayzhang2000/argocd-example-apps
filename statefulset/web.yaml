@@ -37,6 +37,7 @@ spec:
             - name: www
               mountPath: /usr/share/nginx/html
   volumeClaimTemplates:
+    kind: PersistentVolumeClaim
     - metadata:
         name: www
       spec:
