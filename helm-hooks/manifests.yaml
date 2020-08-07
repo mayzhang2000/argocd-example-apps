@@ -21,7 +21,7 @@ metadata:
   name: maint-page-up
   annotations:
     helm.sh/hook: pre-install
-    helm.sh/hook-delete-policy: hook-succeeded
+    helm.sh/hook-delete-policy: before-hook-creation
     helm.sh/hook-weight: "-1"
 spec:
   template:
@@ -71,7 +71,7 @@ metadata:
   name: maint-page-down
   annotations:
     helm.sh/hook: post-install
-    helm.sh/hook-delete-policy: hook-succeeded
+    helm.sh/hook-delete-policy: before-hook-creation
 spec:
   template:
     spec:
