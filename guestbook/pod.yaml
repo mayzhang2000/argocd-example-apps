@@ -5,7 +5,6 @@ metadata:
     app.kubernetes.io/instance: a-single-pod
     foo: bar
   name: hello
-  namespace: default
 spec:
   containers:
     - name: hello
