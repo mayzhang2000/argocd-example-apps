@@ -10,7 +10,6 @@ metadata:
     app.kubernetes.io/name: freight-posting-test
     helm.sh/chart: node-4
   name: freight-posting-test
-  namespace: test
 spec:
   replicas: 8
   revisionHistoryLimit: 3
