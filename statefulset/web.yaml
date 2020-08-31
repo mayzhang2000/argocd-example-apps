@@ -19,6 +19,8 @@ metadata:
 spec:
   serviceName: nginx
   replicas: 3
+  updateStrategy:
+    type: OnDelete
   selector:
     matchLabels:
       app: nginx
