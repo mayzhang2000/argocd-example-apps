@@ -1,0 +1,3 @@
+# patches/job-generate-name.yaml
+- op: remove
+  path: /metadata/name

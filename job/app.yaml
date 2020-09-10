@@ -1,0 +1,50 @@
+# app.yaml
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: job-test
+  # Add a this finalizer ONLY if you want these to cascade delete.
+  # finalizers:
+  #   - resources-finalizer.argocd.argoproj.io
+spec:
+  project: xxxxxxx
+
+  source:
+    repoURL: https://github.com/xxxxx/xxxxxx
+    targetRevision: job-test
+    path: xxxxx/test
+
+    kustomize:
+      version: v2.0.3
+      # Optional image name prefix
+      # namePrefix: prod-
+      # Optional images passed to "kustomize edit set image".
+      # images:
+      # - gcr.io/heptio-images/ks-guestbook-demo:0.2
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: xxxxxx
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: false
+    syncOptions:
+      # Disables resource validation (equivalent to 'kubectl apply --validate=true')
+      - Validate=false
+      # Ensures that namespace specified as the application destination exists in the destination cluster.
+      - CreateNamespace=false
+    retry:
+      limit: 5
+      backoff:
+        duration: 5s
+        factor: 2
+        maxDuration: 3m
+
+  # Ignore differences at the specified json pointers
+  # ignoreDifferences:
+  # - group: apps
+  #   kind: Deployment
+  #   jsonPointers:
+  #   - /spec/replicas

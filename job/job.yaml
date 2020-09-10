@@ -1,0 +1,19 @@
+# job.yaml
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: app-job-test
+  generateName: app-job-test-
+  annotations:
+    argocd.argoproj.io/hook: PreSync
+    argocd.argoproj.io/hook-delete-policy: BeforeHookCreation
+spec:
+  template:
+    spec:
+      containers:
+        - name: hello-world
+          image: docker/whalesay
+          command: [cowsay]
+          args: ["Hello, World!"]
+      restartPolicy: Never
+  backoffLimit: 2
