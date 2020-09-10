@@ -1,19 +1,19 @@
-# job.yaml
-apiVersion: batch/v1
-kind: Job
+apiVersion: apps/v1 # for versions before 1.9.0 use apps/v1beta2
+kind: Deployment
 metadata:
-  name: app-job-test
-  generateName: app-job-test-
-  annotations:
-    argocd.argoproj.io/hook: PreSync
-    argocd.argoproj.io/hook-delete-policy: BeforeHookCreation
+  name: nginx-deployment
 spec:
+  selector:
+    matchLabels:
+      app: nginx
+  replicas: 2 # tells deployment to run 2 pods matching the template
   template:
+    metadata:
+      labels:
+        app: nginx
     spec:
       containers:
-        - name: hello-world
-          image: docker/whalesay
-          command: [cowsay]
-          args: ["Hello, World!"]
-      restartPolicy: Never
-  backoffLimit: 2
+        - name: nginx
+          image: nginx:1.19
+          ports:
+            - containerPort: 80
