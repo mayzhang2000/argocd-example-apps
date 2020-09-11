@@ -4,6 +4,7 @@ metadata:
   name: test-auto-sync-self-heal-disabled
 spec:
   destination:
+    server: https://kubernetes.default.svc
   project: default
   source:
     path: helm-argoapp
