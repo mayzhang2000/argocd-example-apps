@@ -1,4 +1,0 @@
-dependencies:
-  - name: jfrog/artifactory-oss
-    version: 3.1.0
-    repository: https://repo.chartcenter.io
