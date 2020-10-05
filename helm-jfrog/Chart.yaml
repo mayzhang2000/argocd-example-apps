@@ -1,7 +1,1 @@
-apiVersion: v2
 name: artifactory-oss
-version: v1.0.0
-dependencies:
-  - name: jfrog/artifactory-oss
-    version: 3.1.0
-    repository: https://repo.chartcenter.io
