@@ -1,4 +1,2 @@
-apiVersion: v2
 name: artifactory-oss
-version: 0.1.0
 
