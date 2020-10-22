@@ -5,6 +5,7 @@ metadata:
   generateName: upgrade-sql-schema
   annotations:
     argocd.argoproj.io/hook: PreSync
+    argocd.argoproj.io/sync-wave: "3"
 spec:
   template:
     spec:
@@ -13,6 +14,26 @@ spec:
           image: alpine:latest
           command: ["sleep", "5"]
       restartPolicy: Never
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    app.kubernetes.io/instance: a-single-pod
+    foo: bar
+  name: hello
+  annotations:
+    argocd.argoproj.io/hook: PreSync
+    argocd.argoproj.io/sync-wave: "1"
+spec:
+  containers:
+    - name: hello
+      image: busybox
+      command:
+        - sh
+      args:
+        - -c
+        - "echo HI && tail -f /dev/null"
 ---
 apiVersion: apps/v1
 kind: ReplicaSet
