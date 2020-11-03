@@ -4,6 +4,7 @@ metadata:
   labels:
     app.kubernetes.io/instance: a-single-pod
     foo: bar
+
   name: helloBotSub
 spec:
   containers:
