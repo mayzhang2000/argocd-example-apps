@@ -1,0 +1,27 @@
+apiVersion: autoscaling/v2beta2
+kind: HorizontalPodAutoscaler
+metadata:
+  labels:
+    app: ambassador
+  name: ambassador-hpa
+spec:
+  # Minimum replicas, check the current CPU utilization and make sure the minimum replicas can sustain under current resources
+  minReplicas: 25
+  # Maximum replicas, please make sure the maximum replicas are higher than what you have in deployment.yaml
+  maxReplicas: 50
+  metrics:
+    - object:
+        metric:
+          name: namespace_app_pod_cpu_utilization
+        target:
+          type: Value
+          value: 60
+        describedObject:
+          apiVersion: apps/v1
+          kind: Deployment
+          name: ambassador
+      type: Object
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: guestbook-ui
