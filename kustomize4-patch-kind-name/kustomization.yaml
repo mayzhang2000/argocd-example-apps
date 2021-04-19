@@ -1,0 +1,15 @@
+Labels:
+  fruit: peach
+  car: model-T
+CommonLabels:
+    app: myapp
+resources:
+  - deployment.yaml
+  - pod.yaml
+patches:
+  - path: patch.yaml
+    target:
+      kind: Deployment
+    options:
+      allowNameChange: true
+      allowKindChange: true
